@@ -16,7 +16,6 @@ const styles = {
   nav: {
     display: 'flex',
     width: '100%',
-    color: 'white',
     justifyContent: 'space-between',
     alignItems: 'center',
     color: 'white',
