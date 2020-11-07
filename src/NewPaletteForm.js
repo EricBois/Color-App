@@ -12,7 +12,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ChromePicker } from 'react-color';
-import { colors } from '@material-ui/core';
 
 const drawerWidth = 400;
 
