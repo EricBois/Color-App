@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { ChromePicker } from 'react-color';
+import { withStyles } from '@material-ui/core/styles';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
+const styles = {
+  picker: {
+    width: '100% !important',
+    marginTop: '2rem',
+  },
+  addColor: {
+    width: '100%',
+    padding: '1rem',
+    marginTop: '1rem',
+    fontSize: '2rem',
+  },
+  colorNameInput: {
+    width: '100%',
+    height: '70px',
+  },
+};
 
 class ColorPickerForm extends Component {
   constructor(props) {
@@ -9,11 +27,11 @@ class ColorPickerForm extends Component {
     this.state = {
       currentColor: 'teal',
       newcolorName: '',
-    }
+    };
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  };
+  }
 
   componentDidMount() {
     // custom rule
@@ -25,15 +43,15 @@ class ColorPickerForm extends Component {
     ValidatorForm.addValidationRule('isColorUnique', (value) =>
       this.props.colors.every(({ color }) => color !== this.state.currentColor)
     );
-  };
+  }
 
-  updateCurrentColor(color)  {
+  updateCurrentColor(color) {
     this.setState({ currentColor: color.hex });
-  };
+  }
 
   handleChange(evt) {
     this.setState({ [evt.target.name]: evt.target.value });
-  };
+  }
 
   handleSubmit() {
     const newColor = {
@@ -41,22 +59,27 @@ class ColorPickerForm extends Component {
       name: this.state.newColorName,
     };
     this.props.addNewColor(newColor);
-    this.setState({newColorName: ''})
+    this.setState({ newColorName: '' });
   }
 
   render() {
-    const {paletteIsFull} = this.props;
+    const { paletteIsFull, classes } = this.props;
     const { currentColor, newColorName } = this.state;
     return (
       <div>
         <ChromePicker
           color={currentColor}
+          className={classes.picker}
           onChangeComplete={(newColor) => this.updateCurrentColor(newColor)}
         />
         <ValidatorForm onSubmit={this.handleSubmit}>
           <TextValidator
             value={newColorName}
+            placeholder="Color Name"
             name="newColorName"
+            className={classes.colorNameInput}
+            variant="filled"
+            margin="normal"
             onChange={this.handleChange}
             validators={['required', 'isColorNameUnique', 'isColorUnique']}
             errorMessages={[
@@ -69,6 +92,7 @@ class ColorPickerForm extends Component {
             variant="contained"
             disabled={paletteIsFull}
             color="primary"
+            className={classes.addColor}
             type="submit"
             style={{
               backgroundColor: paletteIsFull ? 'grey' : this.state.currentColor,
@@ -82,4 +106,4 @@ class ColorPickerForm extends Component {
   }
 }
 
-export default ColorPickerForm;
+export default withStyles(styles)(ColorPickerForm);
