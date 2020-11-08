@@ -140,6 +140,12 @@ class NewPaletteForm extends Component {
     this.props.history.push('/');
   };
 
+  handleDelete = (colorName) => {
+    this.setState({
+      colors: this.state.colors.filter(color => color.name !== colorName)
+    });
+  };
+
   render() {
     const { classes } = this.props;
     const { open } = this.state;
@@ -249,6 +255,7 @@ class NewPaletteForm extends Component {
               key={color.color}
               color={color.color}
               name={color.name}
+              handleClick={() => this.handleDelete(color.name)}
             />
           ))}
         </main>
