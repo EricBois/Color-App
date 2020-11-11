@@ -16,7 +16,7 @@ const drawerWidth = 400;
 
 const styles = (theme) => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -25,7 +25,8 @@ const styles = (theme) => ({
     }),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: '64px'
+    alignItems: 'center',
+    height: '64px',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -38,16 +39,29 @@ const styles = (theme) => ({
   menuButton: {
     marginLeft: 12,
     marginRight: 20,
-  }, 
+  },
   navBtns: {
-
+    marginRight: '1rem',
+    "& a": {
+      textDecoration: 'none'
+    }
+  },
+  button: {
+    margin: '0 0.5rem',
   }
 });
 
 class PaletteFormNav extends Component {
+  state = {
+    formShowing: false,
+  };
 
   handleChange = (evt) => {
     this.setState({ [evt.target.name]: evt.target.value });
+  };
+
+  showForm = () => {
+    this.setState({ formShowing: true });
   };
 
   render() {
@@ -76,14 +90,31 @@ class PaletteFormNav extends Component {
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
-              <PaletteMetaForm palettes={this.props.palettes} handleSubmit={handleSubmit} />
-              <Link to="/">
-                  <Button variant="contained" color="secondary">
-                    Go Back
-                  </Button>
-                </Link>
-            </div>
+            <Link to="/">
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.button}
+              >
+                Go Back
+              </Button>
+            </Link>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.showForm}
+            >
+              Save
+            </Button>
+          </div>
         </AppBar>
+        {this.state.formShowing && (
+          <PaletteMetaForm
+            palettes={this.props.palettes}
+            handleSubmit={handleSubmit}
+          />
+        )}
       </div>
     );
   }
