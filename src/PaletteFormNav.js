@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -26,14 +25,20 @@ class PaletteFormNav extends Component {
   };
 
   hideForm = () => {
-    this.setState({formShowing: false})
+    this.setState({ formShowing: false });
   };
 
   render() {
-    const { classes, open, handleSubmit } = this.props;
+    const {
+      classes,
+      open,
+      handleSubmit,
+      handleDrawerOpen,
+      palettes,
+    } = this.props;
+    const { formShowing } = this.state;
     return (
       <div className={classes.root}>
-        {/* <CssBaseline /> */}
         <AppBar
           position="fixed"
           color="default"
@@ -45,8 +50,10 @@ class PaletteFormNav extends Component {
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.props.handleDrawerOpen}
-              className={classNames(classes.menuButton, {[classes.hide]: open})}
+              onClick={handleDrawerOpen}
+              className={classNames(classes.menuButton, {
+                [classes.hide]: open,
+              })}
             >
               <MenuIcon />
             </IconButton>
@@ -74,9 +81,9 @@ class PaletteFormNav extends Component {
             </Button>
           </div>
         </AppBar>
-        {this.state.formShowing && (
+        {formShowing && (
           <PaletteMetaForm
-            palettes={this.props.palettes}
+            palettes={palettes}
             handleSubmit={handleSubmit}
             hideForm={this.hideForm}
           />

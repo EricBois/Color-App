@@ -79,7 +79,7 @@ class ColorPickerForm extends Component {
             className={classes.addColor}
             type="submit"
             style={{
-              backgroundColor: paletteIsFull ? 'grey' : this.state.currentColor,
+              backgroundColor: paletteIsFull ? 'grey' : currentColor,
             }}
           >
             {paletteIsFull ? 'Palette Full' : 'Add Color'}
