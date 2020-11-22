@@ -2,6 +2,8 @@
 
 A clone of websites like Flat UI Colors and Material UI Colors.
 
+DEMO: [https://stupefied-kalam-5e4084.netlify.app/]
+
 ## Available Scripts
 
 In the project directory, you can run:
