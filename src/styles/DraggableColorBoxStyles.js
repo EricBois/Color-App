@@ -41,6 +41,7 @@ const styles = {
   },
   deleteIcon: {
     transition: 'all 0.3s ease-in-out',
+    marginRight: '1.5vh'
   },
 };
 
